@@ -12,6 +12,12 @@ allprojects {
         plugin("io.spring.dependency-management")
     }
 
+    tasks{
+        test{
+            useJUnitPlatform()
+        }
+    }
+
     afterEvaluate {
         dependencyManagement{
             imports {
