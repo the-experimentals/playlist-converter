@@ -12,3 +12,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "playlist-converter"
 include(":server-springboot")
+include(":clientapp-react")
