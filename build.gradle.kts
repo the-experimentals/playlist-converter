@@ -3,6 +3,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.2"
     id("org.springframework.boot") version "3.1.1" apply false
     id("com.github.node-gradle.node") version "5.0.0" apply false
+    id("io.freefair.lombok") version "8.1.0" apply false
 }
 
 allprojects {
@@ -20,7 +21,7 @@ allprojects {
             }
 
             dependencies{
-
+                dependency("com.squareup.okhttp3:okhttp:4.11.0")
             }
         }
     }

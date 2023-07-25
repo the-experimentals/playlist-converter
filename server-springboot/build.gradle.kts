@@ -1,6 +1,7 @@
 plugins{
     kotlin("jvm")
     id("org.springframework.boot")
+    id("io.freefair.lombok")
 }
 
 dependencies{
@@ -11,6 +12,9 @@ dependencies{
         exclude("org.springframework.boot", "spring-boot-starter-tomcat")
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("com.squareup.okhttp3:okhttp")
+
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
