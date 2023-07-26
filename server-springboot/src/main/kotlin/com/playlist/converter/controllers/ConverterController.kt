@@ -16,8 +16,8 @@ class ConverterController(val properties:PlaylistConverterProperties) {
 
         val formBody: FormBody = FormBody.Builder()
                 .add("grant_type","client_credentials")
-                .add("client_id","")
-                .add("client_secret","")
+                .add("client_id",properties.clientId)
+                .add("client_secret",properties.clientSecret)
                 .build()
 
         val request: Request = Request.Builder().post(formBody).header("Content-Type","application/x-www-form-urlencoded")

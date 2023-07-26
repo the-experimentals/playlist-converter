@@ -9,5 +9,5 @@ spring:
 
 playlist-converter:
   spotify:
-    client-id: dummy
-    client-secret: dummy
+    client-id: ${spotify.clientid}
+    client-secret: ${spotify.clientsecret}
