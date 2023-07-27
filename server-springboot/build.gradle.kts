@@ -13,6 +13,7 @@ dependencies{
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 

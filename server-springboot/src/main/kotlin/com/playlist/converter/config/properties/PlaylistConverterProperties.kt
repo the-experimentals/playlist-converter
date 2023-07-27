@@ -1,9 +1,12 @@
 package com.playlist.converter.config.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-@ConfigurationProperties(prefix = "playlist-converter.spotify")
+@ConfigurationProperties(prefix = "playlist-converter")
 data class PlaylistConverterProperties(
-
-    var clientId:String ="",
-    var clientSecret: String = ""
-)
+    var spotify: Spotify = Spotify()
+) {
+    data class Spotify(
+        var clientId:String ="",
+        var clientSecret: String = ""
+    )
+}

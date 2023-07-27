@@ -22,6 +22,7 @@ allprojects {
 
             dependencies{
                 dependency("com.squareup.okhttp3:okhttp:4.11.0")
+                dependency("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2")
             }
         }
     }
