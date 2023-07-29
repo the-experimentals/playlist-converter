@@ -3,6 +3,8 @@
     <ExternalSystemSettings>
       <option name="env">
         <map>
+          <entry key="spotify.clientid" value="03936c6dc3ac43d5beffc48dde7f0636" />
+          <entry key="spotify.clientsecret" value="7ba6e9d912c74032bafe4db6da8cc628" />
           <entry key="spring.profiles.active" value="dev,local" />
         </map>
       </option>
