@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: converter
+
+server:
+  servlet:
+    context-path: /converter
+  port: 8080
