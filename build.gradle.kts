@@ -22,7 +22,7 @@ allprojects {
             }
 
             dependencies {
-
+                dependency("com.squareup.okhttp3:okhttp:4.11.0")
             }
         }
     }

@@ -8,6 +8,7 @@ dependencies{
         exclude("org.springframework.boot", "spring-boot-starter-tomcat")
     }
     implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("com.squareup.okhttp3:okhttp")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

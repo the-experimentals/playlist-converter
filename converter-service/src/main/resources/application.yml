@@ -9,5 +9,5 @@ server:
 
 playlist-converter:
   spotify:
-    client-id: abc
-    client-secret: abdl
+    client-id: ${SPOTIFY_CLIENT_ID}
+    client-secret: ${SPOTIFY_CLIENT_SECRET}
