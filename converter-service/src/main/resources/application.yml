@@ -6,3 +6,8 @@ server:
   servlet:
     context-path: /converter
   port: 8080
+
+playlist-converter:
+  spotify:
+    client-id: abc
+    client-secret: abdl
