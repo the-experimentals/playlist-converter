@@ -12,5 +12,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "playlist-converter"
 
-include(":converter")
+include(":converter-service")
 include(":clientapp-react")
