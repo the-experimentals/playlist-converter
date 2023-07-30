@@ -4,6 +4,7 @@ plugins{
     id("io.spring.dependency-management") version "1.1.2"
     id("com.github.node-gradle.node") version "5.0.0" apply false
     id("io.freefair.lombok") version "8.1.0" apply false
+    id("org.springframework.boot") version "3.1.2" apply false
 }
 
 allprojects {

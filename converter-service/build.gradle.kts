@@ -1,5 +1,6 @@
 plugins{
     id("io.freefair.lombok")
+    id("org.springframework.boot")
 }
 
 dependencies{
@@ -9,7 +10,6 @@ dependencies{
     implementation("org.springframework.boot:spring-boot-starter-undertow")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
 
 }
 
