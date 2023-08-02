@@ -11,7 +11,7 @@ allprojects {
     group = "com.playlist.converter"
 
     apply {
-        plugin("kotlin")
+        plugin("base")
         plugin("io.spring.dependency-management")
     }
 

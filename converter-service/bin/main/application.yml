@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: converter
+
+server:
+  servlet:
+    context-path: /converter
+  port: 8080
+
+playlist-converter:
+  spotify:
+    client-id: ${SPOTIFY_CLIENT_ID}
+    client-secret: ${SPOTIFY_CLIENT_SECRET}
