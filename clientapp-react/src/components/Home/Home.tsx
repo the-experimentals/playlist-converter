@@ -7,6 +7,7 @@ import { SpotifyPlaylistResponse } from '../../models/SpotifyPlaylistResponse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleDown, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faMusic } from '@fortawesome/free-solid-svg-icons';
 
 interface HomeProps {}
 
@@ -66,8 +67,16 @@ const Home: FC<HomeProps> = () => {
           {isSpotifyLoggedIn ?
             <div className='padding2030' style={{background:'#f5f5f5'}}>
               <Card style={{textAlign:'left', padding:'10px 15px'}}>
-                <Typography variant='h5'>{spotifyPlaylist?.name}</Typography>
-                <Typography variant='subtitle1' style={{color:'#999'}}>Total tracks: {spotifyPlaylist?.tracks}</Typography>
+                <Grid container>
+                  <Grid item xs={3} style={{borderRight:'1px solid red'}}>
+                    <FontAwesomeIcon icon={faMusic} style={{fontSize:'3rem', marginTop:'10px', marginLeft:'8px'}}></FontAwesomeIcon>
+                  </Grid>
+                  <Grid item xs={9} style={{padding:'0.5rem'}}>
+                    <Typography variant='h5'>{spotifyPlaylist?.name}</Typography>
+                    <Typography variant='subtitle1' style={{color:'#999'}}>Total tracks: {spotifyPlaylist?.tracks}</Typography>
+                  </Grid>
+                </Grid>
+                
               </Card>
 
               <Typography style={{marginTop:'0.5rem', textAlign:'left'}} variant='subtitle2'>Transfering playlist will create new playlist on destination platform.</Typography>
