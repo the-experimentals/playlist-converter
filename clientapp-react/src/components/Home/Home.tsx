@@ -4,6 +4,9 @@ import React, { FC, useEffect, useState } from 'react';
 import { Buffer } from "buffer";
 import { SpotifyAccesResponse } from '../../models/SpotifyAccessResponse';
 import { SpotifyPlaylistResponse } from '../../models/SpotifyPlaylistResponse';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleDown, faUser } from '@fortawesome/free-regular-svg-icons';
+import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 interface HomeProps {}
 
@@ -42,23 +45,26 @@ const Home: FC<HomeProps> = () => {
     }
   },[])
   return(
-    <Grid container spacing={2} 
+    <Grid container spacing={5} 
           className='padding2030' 
           justifyContent={'center'} 
           alignItems={'center'}>
             <Grid item xs={12} style={{textAlign:'center'}} className='padding2030'>
-              <Typography variant='h3'>Transfer playlist.</Typography>
+              <Typography variant='h3'>Transfer playlist</Typography>
               <Typography variant='subtitle2'>Transfer all playlist tracks from Spotify to YouTube</Typography>
             </Grid>
       <Grid item xs={4}>
-        <Card className='shadow padding2030' style={{textAlign:'center'}}>
-          <Typography variant='h4'>Spotify</Typography>
-          <div style={{padding:'10px 15px'}}>
-            {isSpotifyLoggedIn ? "LoggedIn" : <Button variant='contained' onClick={spotifyLogin}>Login</Button>}
-          </div>
-
+        <Card className='shadow' style={{textAlign:'center', transition:'all 0.2s ease-in-out'}}>
+          <header style={{background:'black', color:'#f5f5f5'}} className='padding2030'>
+            <Typography variant='h4' style={{display:'inline-block', marginRight:'0.75rem', transition:'all 0.2s ease-in-out'}}>
+              <FontAwesomeIcon icon={faSpotify} style={{marginRight:'0.25rem'}}></FontAwesomeIcon>
+              Spotify
+            </Typography>
+            {isSpotifyLoggedIn ? "" : <Button variant='contained' style={{marginTop:'-0.75rem'}} onClick={spotifyLogin}>Login</Button>}
+          </header>
+          
           {isSpotifyLoggedIn ?
-            <div className='padding2030'>
+            <div className='padding2030' style={{background:'#f5f5f5'}}>
               <Card style={{textAlign:'left', padding:'10px 15px'}}>
                 <Typography variant='h5'>{spotifyPlaylist?.name}</Typography>
                 <Typography variant='subtitle1' style={{color:'#999'}}>Total tracks: {spotifyPlaylist?.tracks}</Typography>
@@ -75,11 +81,15 @@ const Home: FC<HomeProps> = () => {
         </Card>
       </Grid>
       <Grid item xs={4}>
-        <Card className='shadow padding2030' style={{textAlign:'center'}}>
-          <Typography variant='h4'>YouTube</Typography>
-          <div style={{padding:'10px 15px'}}>
-            <Button variant='contained'>Login</Button>
-          </div>
+        <Card className='shadow' style={{textAlign:'center'}}>
+          <header style={{background:'black', color:'#f5f5f5'}} className='padding2030'>
+            <Typography variant='h4' style={{display:'inline-block', marginRight:'0.75rem', transition:'all 0.2s ease-in-out'}}>
+            <FontAwesomeIcon icon={faYoutube} style={{color:'#FF0100', marginRight:'0.25rem'}}></FontAwesomeIcon>
+              YouTube
+            </Typography>
+            <Button variant='contained'  style={{marginTop:'-0.75rem'}}>Login</Button>
+          </header>
+          
         </Card>
       </Grid>
     </Grid>
