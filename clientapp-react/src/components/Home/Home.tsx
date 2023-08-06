@@ -46,16 +46,39 @@ const Home: FC<HomeProps> = () => {
           className='padding2030' 
           justifyContent={'center'} 
           alignItems={'center'}>
+            <Grid item xs={12} style={{textAlign:'center'}} className='padding2030'>
+              <Typography variant='h3'>Transfer playlist.</Typography>
+              <Typography variant='subtitle2'>Transfer all playlist tracks from Spotify to YouTube</Typography>
+            </Grid>
       <Grid item xs={4}>
         <Card className='shadow padding2030' style={{textAlign:'center'}}>
           <Typography variant='h4'>Spotify</Typography>
           <div style={{padding:'10px 15px'}}>
             {isSpotifyLoggedIn ? "LoggedIn" : <Button variant='contained' onClick={spotifyLogin}>Login</Button>}
           </div>
-          <div style={{border:'1px solid'}} className='padding2030'>
-            <h4>{spotifyPlaylist?.name}</h4>
-            <span>{spotifyPlaylist?.tracks}</span>
-            <span>{spotifyPlaylist?.href}</span>
+
+          {isSpotifyLoggedIn ?
+            <div className='padding2030'>
+              <Card style={{textAlign:'left', padding:'10px 15px'}}>
+                <Typography variant='h5'>{spotifyPlaylist?.name}</Typography>
+                <Typography variant='subtitle1' style={{color:'#999'}}>Total tracks: {spotifyPlaylist?.tracks}</Typography>
+              </Card>
+
+              <Typography style={{marginTop:'0.5rem', textAlign:'left'}} variant='subtitle2'>Transfering playlist will create new playlist on destination platform.</Typography>
+              <div style={{textAlign:'right', marginTop:'1rem'}}>
+                <Button variant='contained'> Transfer</Button>
+              </div>
+            </div>
+          : ""}
+
+          
+        </Card>
+      </Grid>
+      <Grid item xs={4}>
+        <Card className='shadow padding2030' style={{textAlign:'center'}}>
+          <Typography variant='h4'>YouTube</Typography>
+          <div style={{padding:'10px 15px'}}>
+            <Button variant='contained'>Login</Button>
           </div>
         </Card>
       </Grid>
