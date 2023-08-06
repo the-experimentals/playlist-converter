@@ -16,7 +16,7 @@ const Home: FC<HomeProps> = () => {
     let spotifyLoggedIn = queryParam.get("code") != null
     if(spotifyLoggedIn){
       const getToken = async () => {
-        let response = await axios.post( process.env.REACT_APP_SPOTIFY_URL + "api/token", {
+        let response = await axios.post( process.env.REACT_APP_SPOTIFY_ACCOUNT_URL + "api/token", {
           grant_type: 'authorization_code',
           code: queryParam.get("code"),
           redirect_uri: process.env.REACT_APP_REDIRECT_URL
@@ -70,11 +70,11 @@ const spotifyLogin = () => {
   queryParams.set("scope","playlist-read-private")
   queryParams.set("redirect_uri", process.env.REACT_APP_REDIRECT_URL as string)
 
-  window.location.replace( process.env.REACT_APP_SPOTIFY_URL+ "authorize?" + queryParams.toString())
+  window.location.replace( process.env.REACT_APP_SPOTIFY_ACCOUNT_URL+ "authorize?" + queryParams.toString())
 }
 
 const getSpotifyPlaylist = async (setSpotifyPlaylist:any) => {
-  let response = await axios.get("https://api.spotify.com/v1/me/playlists", {
+  let response = await axios.get( process.env.REACT_APP_SPOTIFY_API_URL + "v1/me/playlists", {
     headers: {
       "Authorization": "Bearer " + sessionStorage.getItem("spotifyAccessToken")
     }
