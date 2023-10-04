@@ -6,4 +6,9 @@ export const ROUTES: IRoute[] = [{
     name: "",
     component: Home,
     exact: true
+}, {
+    path: 'google-redirect/{state}',
+    name: "",
+    component: Home,
+    exact: true
 }]

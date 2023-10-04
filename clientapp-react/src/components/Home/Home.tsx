@@ -1,22 +1,25 @@
 import { Button, Card, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { FC, useEffect, useState } from 'react';
-import { Buffer } from "buffer";
 import { SpotifyAccesResponse } from '../../models/SpotifyAccessResponse';
 import { SpotifyPlaylistResponse } from '../../models/SpotifyPlaylistResponse';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleDown, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { useAtom } from 'jotai';
+import { converterStateAtom } from '../../atoms/atoms';
 
 interface HomeProps {}
 
 const Home: FC<HomeProps> = () => {
-  const queryParam = new URLSearchParams(document.location.search)
+  
   const [isSpotifyLoggedIn, setSpotifyLoggedIn] = useState(false)
   const [spotifyPlaylist, setSpotifyPlaylist] = useState<SpotifyPlaylistResponse>()
+  const [converterState, setConverterState] = useAtom(converterStateAtom)
 
   useEffect(() => {
+    const queryParam = new URLSearchParams(document.location.search)
     let spotifyLoggedIn = queryParam.get("code") != null
     if(spotifyLoggedIn){
       const getToken = async () => {
@@ -45,15 +48,48 @@ const Home: FC<HomeProps> = () => {
       })
     }
   },[])
+
+  const spotifyLogin = () => {
+    debugger
+    let queryParams = new URLSearchParams()
+    queryParams.set("response_type","code")
+    queryParams.set("client_id",process.env.REACT_APP_SPOTIFY_CLIENT_ID as string)
+    queryParams.set("scope","playlist-read-private")
+    queryParams.set("redirect_uri", process.env.REACT_APP_REDIRECT_URL as string)
+  
+    window.location.replace( process.env.REACT_APP_SPOTIFY_ACCOUNT_URL+ "authorize?" + queryParams.toString())
+
+    
+  }
+
+  const getSpotifyPlaylist = async (setSpotifyPlaylist:any) => {
+    let response = await axios.get( process.env.REACT_APP_SPOTIFY_API_URL + "v1/me/playlists", {
+      headers: {
+        "Authorization": "Bearer " + sessionStorage.getItem("spotifyAccessToken")
+      }
+    })
+  
+    if(response.status == 200){
+  
+        response.data.items.forEach((playlist:any, index:number) => {
+          setSpotifyPlaylist({
+            name:playlist.name,
+            tracks: playlist.tracks.total,
+            href: playlist.tracks.href
+          })  
+        });
+    }      
+  }
+
   return(
     <Grid container spacing={5} 
           className='padding2030' 
           justifyContent={'center'} 
-          alignItems={'center'}>
-            <Grid item xs={12} style={{textAlign:'center'}} className='padding2030'>
-              <Typography variant='h3'>Transfer playlist</Typography>
-              <Typography variant='subtitle2'>Transfer all playlist tracks from Spotify to YouTube</Typography>
-            </Grid>
+          alignItems={'center'} sx={{maxWidth:'1440PX', margin:'auto'}}>
+      <Grid item xs={12} style={{textAlign:'center'}} className='padding2030'>
+        <Typography variant='h3'>Transfer playlist</Typography>
+        <Typography variant='subtitle2'>Transfer all playlist tracks from Spotify to YouTube</Typography>
+      </Grid>
       <Grid item xs={4}>
         <Card className='shadow' style={{textAlign:'center', transition:'all 0.2s ease-in-out'}}>
           <header style={{background:'black', color:'#f5f5f5'}} className='padding2030'>
@@ -96,7 +132,22 @@ const Home: FC<HomeProps> = () => {
             <FontAwesomeIcon icon={faYoutube} style={{color:'#FF0100', marginRight:'0.25rem'}}></FontAwesomeIcon>
               YouTube
             </Typography>
-            <Button variant='contained'  style={{marginTop:'-0.75rem'}}>Login</Button>
+            <div style={{width:'fit-content', margin:'auto'}}>              
+              <GoogleOAuthProvider                        
+                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
+                <GoogleLogin                
+                  onSuccess={(res) => {
+                    debugger
+                    setConverterState((prevState) => ({
+                      ...prevState,
+                      googleToken: res.credential !== undefined ? res.credential : ""
+                    }))
+                  }} 
+                  onError={() => {
+
+                  }} />               
+              </GoogleOAuthProvider>          
+            </div>
           </header>
           
         </Card>
@@ -105,34 +156,8 @@ const Home: FC<HomeProps> = () => {
   )
 }
 
-const spotifyLogin = () => {
-  let queryParams = new URLSearchParams()
-  queryParams.set("response_type","code")
-  queryParams.set("client_id",process.env.REACT_APP_SPOTIFY_CLIENT_ID as string)
-  queryParams.set("scope","playlist-read-private")
-  queryParams.set("redirect_uri", process.env.REACT_APP_REDIRECT_URL as string)
 
-  window.location.replace( process.env.REACT_APP_SPOTIFY_ACCOUNT_URL+ "authorize?" + queryParams.toString())
-}
 
-const getSpotifyPlaylist = async (setSpotifyPlaylist:any) => {
-  let response = await axios.get( process.env.REACT_APP_SPOTIFY_API_URL + "v1/me/playlists", {
-    headers: {
-      "Authorization": "Bearer " + sessionStorage.getItem("spotifyAccessToken")
-    }
-  })
 
-  if(response.status == 200){
-
-      response.data.items.forEach((playlist:any, index:number) => {
-        setSpotifyPlaylist({
-          name:playlist.name,
-          tracks: playlist.tracks.total,
-          href: playlist.tracks.href
-        })  
-      });
-  }
-    
-}
 
 export default Home;

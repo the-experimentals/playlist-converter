@@ -4,7 +4,7 @@ interface IRoute{
     exact: boolean
     component: any
     props?: any
-    childern?: IRoute[]
+    children?: IRoute[]
 }
 
 export default IRoute
