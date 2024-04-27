@@ -1,10 +1,10 @@
 plugins{
     base
-    kotlin("jvm") version "1.9.0"
-    id("io.spring.dependency-management") version "1.1.2"
-    id("com.github.node-gradle.node") version "5.0.0" apply false
-    id("io.freefair.lombok") version "8.1.0" apply false
-    id("org.springframework.boot") version "3.1.2" apply false
+    kotlin("jvm") version "1.9.23"
+    id("io.spring.dependency-management") version "1.1.4"
+    id("com.github.node-gradle.node") version "7.0.2" apply false
+    id("io.freefair.lombok") version "8.6" apply false
+    id("org.springframework.boot") version "3.2.5" apply false
 }
 
 allprojects {
@@ -18,11 +18,11 @@ allprojects {
     afterEvaluate {
         dependencyManagement{
             imports {
-                mavenBom("org.springframework.boot:spring-boot-dependencies:3.1.2")
+                mavenBom("org.springframework.boot:spring-boot-dependencies:3.2.5")
             }
 
             dependencies {
-                dependency("com.squareup.okhttp3:okhttp:4.11.0")
+                dependency("com.squareup.okhttp3:okhttp:4.12.0")
             }
         }
     }
